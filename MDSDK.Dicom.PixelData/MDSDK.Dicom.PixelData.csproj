@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MDSDK.BinaryIO\MDSDK.BinaryIO\MDSDK.BinaryIO.csproj" />
+    <ProjectReference Include="..\..\MDSDK.Dicom.Serialization\MDSDK.Dicom.Serialization\MDSDK.Dicom.Serialization.csproj" />
+  </ItemGroup>
+
+</Project>

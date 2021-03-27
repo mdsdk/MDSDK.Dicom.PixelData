@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDSDK.Dicom.PixelData", "MDSDK.Dicom.PixelData\MDSDK.Dicom.PixelData.csproj", "{7CDDCD71-B856-4442-8301-FE65444DC66F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDSDK.BinaryIO", "..\MDSDK.BinaryIO\MDSDK.BinaryIO\MDSDK.BinaryIO.csproj", "{37D00E3F-CF11-43B0-8F5E-83CC8253D8D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CDDCD71-B856-4442-8301-FE65444DC66F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CDDCD71-B856-4442-8301-FE65444DC66F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CDDCD71-B856-4442-8301-FE65444DC66F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CDDCD71-B856-4442-8301-FE65444DC66F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D00E3F-CF11-43B0-8F5E-83CC8253D8D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D00E3F-CF11-43B0-8F5E-83CC8253D8D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D00E3F-CF11-43B0-8F5E-83CC8253D8D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D00E3F-CF11-43B0-8F5E-83CC8253D8D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAD84F94-FAA6-49C6-B082-FFB2D543543C}
+	EndGlobalSection
+EndGlobal
