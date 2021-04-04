@@ -8,8 +8,10 @@ using static MDSDK.Dicom.PixelData.StaticInclude;
 
 namespace MDSDK.Dicom.PixelData.PixelDataDecoders
 {
-    internal class UncompressedPixelDataDecoder : DicomPixelDataDecoder
+    internal sealed class UncompressedPixelDataDecoder : DicomPixelDataDecoder
     {
+        public static UncompressedPixelDataDecoder Instance { get; } = new UncompressedPixelDataDecoder();
+
         public override long[] GetPixelDataFramePositions(DicomStreamReader dicomStreamReader, DicomImagePixelDescription desc,
             int numberOfFrames)
         {
@@ -40,8 +42,10 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
             return pixelDataFramePositions;
         }
 
-        public override void DecodePixelDataFrame(DicomImagePixelDescription desc, BinaryStreamReader input, Span<byte> outputBuffer)
+        public override void DecodePixelDataFrame(DicomStreamReader dicomStreamReader, DicomImagePixelDescription desc, Memory<byte> outputBuffer)
         {
+            var input = dicomStreamReader.Input;
+
             if (input.ByteOrder != ByteOrder.LittleEndian)
             {
                 throw NotSupported(nameof(input.ByteOrder), input.ByteOrder);
@@ -55,7 +59,7 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
 
             if (BinaryIOUtils.NativeByteOrder == ByteOrder.LittleEndian)
             {
-                input.ReadAll(outputBuffer[0..frameSize]);
+                input.ReadAll(outputBuffer.Span[0..frameSize]);
             }
             else
             {

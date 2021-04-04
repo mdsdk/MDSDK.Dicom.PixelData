@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MDSDK.BinaryIO\MDSDK.BinaryIO\MDSDK.BinaryIO.csproj" />
     <ProjectReference Include="..\..\MDSDK.Dicom.Serialization\MDSDK.Dicom.Serialization\MDSDK.Dicom.Serialization.csproj" />
+    <ProjectReference Include="..\..\MDSDK.JPEG2000\MDSDK.JPEG2000\MDSDK.JPEG2000.csproj" />
   </ItemGroup>
 
 </Project>
