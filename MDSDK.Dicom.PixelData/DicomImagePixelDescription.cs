@@ -26,43 +26,6 @@ namespace MDSDK.Dicom.PixelData
 
         public int[] PixelAspectRatio { get; set; }
 
-        public class GrayscaleAttributes
-        {
-            public int? SmallestImagePixelValue { get; set; }
-
-            public int? LargestImagePixelValue { get; set; }
-        }
-
-        public class ColorPaletteAttributes
-        {
-            public int[] RedPaletteColorLookupTable​Descriptor​ { get; set; }
-
-            public int[] GreenPaletteColorLookupTable​Descriptor​ { get; set; }
-
-            public int[] BluePaletteColorLookupTable​Descriptor​ { get; set; }
-
-            public ushort[] RedPaletteColorLookupTableData { get; set; }
-
-            public ushort[] GreenPaletteColorLookupTableData { get; set; }
-
-            public ushort[] BluePaletteColorLookupTableData { get; set; }
-        }
-
-        public class ColorAttributes
-        {
-            public DicomPlanarConfiguration PlanarConfiguration { get; set; }
-
-            public ColorPaletteAttributes Palette { get; set; }
-            
-            public byte[] ICCProfile { get; set; }
-
-            public string ColorSpace { get; set; }
-        }
-
-        public GrayscaleAttributes Grayscale { get; set; }
-
-        public ColorAttributes Color { get; set; }
-
         public int GetSampleSizeInBytes()
         {
             if ((BitsAllocated % 8) != 0)
