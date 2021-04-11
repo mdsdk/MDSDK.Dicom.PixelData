@@ -12,13 +12,14 @@ namespace MDSDK.Dicom.PixelData
     {
         public abstract long[] GetPixelDataFramePositions(DicomStreamReader dicomStreamReader, DicomImagePixelDescription desc,
             int numberOfFrames);
-        
+
         public abstract void DecodePixelDataFrame(DicomStreamReader dicomStreamReader, DicomImagePixelDescription desc, Memory<byte> output);
 
         private static readonly Dictionary<DicomUID, DicomPixelDataDecoder> TransferSyntaxPixelDataDecoders = new()
         {
             { DicomUID.ImplicitVRLittleEndian, UncompressedPixelDataDecoder.Instance },
             { DicomUID.ExplicitVRLittleEndian, UncompressedPixelDataDecoder.Instance },
+            { DicomUID.JPEGLossless_NonHierarchical_FirstOrderPrediction_Process14_SelectionValue1, JPEGLosslessNonDifferentialHuffman1PixelDataDecoder.Instance },
             { DicomUID.JPEG2000ImageCompression, JPEG2000PixelDataDecoder.Instance },
             { DicomUID.JPEG2000ImageCompression_LosslessOnly, JPEG2000PixelDataDecoder.Instance },
         };

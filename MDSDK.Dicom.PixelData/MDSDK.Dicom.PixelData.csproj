@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\MDSDK.JPEG2000\MDSDK.JPEG2000\MDSDK.JPEG2000.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JPEG\" />
+  </ItemGroup>
+
 </Project>
