@@ -22,6 +22,7 @@ namespace MDSDK.Dicom.PixelData
             { DicomUID.JPEGLossless_NonHierarchical_FirstOrderPrediction_Process14_SelectionValue1, JPEGLosslessNonDifferentialHuffman1PixelDataDecoder.Instance },
             { DicomUID.JPEG2000ImageCompression, JPEG2000PixelDataDecoder.Instance },
             { DicomUID.JPEG2000ImageCompression_LosslessOnly, JPEG2000PixelDataDecoder.Instance },
+            { DicomUID.RLELossless, RunLengthPixelDataDecoder.Instance },
         };
 
         public static bool TryGet(DicomUID transferSyntaxUID, out DicomPixelDataDecoder pixelDataDecoder)
