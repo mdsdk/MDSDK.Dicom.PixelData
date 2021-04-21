@@ -137,7 +137,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
         private void SkipIgnorableMiscellanenousMarkerSegment()
         {
             var length = _input.Read<ushort>();
-            _input.SkipBytes(length);
+            _input.SkipBytes(length - 2); // length includes the two bytes of the length field itself
         }
 
         private bool IfIsMiscellanenousMarkerSegmentThenProcessIt(ushort marker)
