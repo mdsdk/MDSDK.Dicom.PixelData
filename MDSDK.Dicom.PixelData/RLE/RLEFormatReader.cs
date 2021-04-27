@@ -7,13 +7,13 @@ namespace MDSDK.Dicom.PixelData.RLE
 {
     internal class RLEFormatReader
     {
-        private readonly BinaryStreamReader _input;
+        private readonly BufferedStreamReader _input;
 
         private readonly long _startPosition;
 
         private readonly Header _header;
 
-        public RLEFormatReader(BinaryStreamReader input)
+        public RLEFormatReader(BufferedStreamReader input)
         {
             _input = input;
 

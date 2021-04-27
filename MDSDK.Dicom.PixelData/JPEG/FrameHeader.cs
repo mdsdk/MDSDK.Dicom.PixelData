@@ -25,28 +25,28 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
             public byte Tq_QuantizationTableDestinationSelector { get; set; }
 
-            public static ComponentSpecification ReadFrom(BinaryStreamReader input)
+            public static ComponentSpecification ReadFrom(BinaryDataReader dataReader)
             {
                 return new ComponentSpecification
                 {
-                    C_ComponentIdentifier = input.ReadByte(),
-                    H_V_SamplingFactors = input.ReadByte(),
-                    Tq_QuantizationTableDestinationSelector = input.ReadByte()
+                    C_ComponentIdentifier = dataReader.ReadByte(),
+                    H_V_SamplingFactors = dataReader.ReadByte(),
+                    Tq_QuantizationTableDestinationSelector = dataReader.ReadByte()
                 };
             }
         }
 
         public ComponentSpecification[] ComponentSpecifications { get; set; }
 
-        public static FrameHeader ReadFrom(BinaryStreamReader input)
+        public static FrameHeader ReadFrom(BinaryDataReader dataReader)
         {
             var frameHeader = new FrameHeader
             {
-                Lf_FrameHeaderLength = input.Read<ushort>(),
-                P_SamplePrecision = input.ReadByte(),
-                Y_NumberOfLines = input.Read<ushort>(),
-                X_NumberOSamplesPerLine = input.Read<ushort>(),
-                Nf_NumberOfImageComponentsInFrame = input.ReadByte()
+                Lf_FrameHeaderLength = dataReader.Read<ushort>(),
+                P_SamplePrecision = dataReader.ReadByte(),
+                Y_NumberOfLines = dataReader.Read<ushort>(),
+                X_NumberOSamplesPerLine = dataReader.Read<ushort>(),
+                Nf_NumberOfImageComponentsInFrame = dataReader.ReadByte()
             };
 
             var Lf = frameHeader.Lf_FrameHeaderLength;
@@ -60,7 +60,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
             var componentSpecifications = new ComponentSpecification[frameHeader.Nf_NumberOfImageComponentsInFrame];
             for (var i = 0; i < componentSpecifications.Length; i++)
             {
-                componentSpecifications[i] = ComponentSpecification.ReadFrom(input);
+                componentSpecifications[i] = ComponentSpecification.ReadFrom(dataReader);
             }
             frameHeader.ComponentSpecifications = componentSpecifications;
 

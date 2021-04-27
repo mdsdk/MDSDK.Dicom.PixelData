@@ -12,7 +12,7 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
     {
         public static JPEG2000PixelDataDecoder Instance { get; } = new JPEG2000PixelDataDecoder();
 
-        protected override void DecodePixelDataFrame(BinaryStreamReader input, DicomImagePixelDescription desc, Memory<byte> output)
+        protected override void DecodePixelDataFrame(BufferedStreamReader input, DicomImagePixelDescription desc, Memory<byte> output)
         {
             var image = JPEG2000Decoder.DecodeImage(input);
             CopyImageToPixelDataBuffer(desc, image, output);

@@ -18,7 +18,7 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
             return framePositions;
         }
 
-        protected abstract void DecodePixelDataFrame(BinaryStreamReader input, DicomImagePixelDescription desc, Memory<byte> output);
+        protected abstract void DecodePixelDataFrame(BufferedStreamReader input, DicomImagePixelDescription desc, Memory<byte> output);
 
         public sealed override void DecodePixelDataFrame(DicomStreamReader dicomStreamReader, DicomImagePixelDescription desc, Memory<byte> output)
         {

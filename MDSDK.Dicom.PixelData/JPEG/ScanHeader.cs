@@ -17,12 +17,12 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
             public byte Td_Ta_EntropyCodingTableDestinationSelectors { get; set; }
 
-            public static ComponentSpecification ReadFrom(BinaryStreamReader input)
+            public static ComponentSpecification ReadFrom(BinaryDataReader dataReader)
             {
                 return new ComponentSpecification
                 {
-                    Cs_ScanComponentSelector = input.ReadByte(),
-                    Td_Ta_EntropyCodingTableDestinationSelectors = input.ReadByte()
+                    Cs_ScanComponentSelector = dataReader.ReadByte(),
+                    Td_Ta_EntropyCodingTableDestinationSelectors = dataReader.ReadByte()
                 };
             }
         }
@@ -35,12 +35,12 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
         public byte Ah_Al_SuccessiveApproximationBitPositions_or_PointTransform  { get; set; }
 
-        public static ScanHeader ReadFrom(BinaryStreamReader input)
+        public static ScanHeader ReadFrom(BinaryDataReader dataReader)
         {
             var scanHeader = new ScanHeader
             {
-                Ls_ScanHeaderLength = input.Read<ushort>(),
-                Ns_NumberOfImageComponentsInScan = input.ReadByte()
+                Ls_ScanHeaderLength = dataReader.Read<ushort>(),
+                Ns_NumberOfImageComponentsInScan = dataReader.ReadByte()
             };
 
 
@@ -55,13 +55,13 @@ namespace MDSDK.Dicom.PixelData.JPEG
             var componentSpecifications = new ComponentSpecification[scanHeader.Ns_NumberOfImageComponentsInScan];
             for (var i = 0; i < componentSpecifications.Length; i++)
             {
-                componentSpecifications[i] = ComponentSpecification.ReadFrom(input);
+                componentSpecifications[i] = ComponentSpecification.ReadFrom(dataReader);
             }
             scanHeader.ComponentSpecifications = componentSpecifications;
 
-            scanHeader.Ss_StartOfSpectral_or_PredictorSelection = input.ReadByte();
-            scanHeader.Se_EndOfSpectralSelection = input.ReadByte();
-            scanHeader.Ah_Al_SuccessiveApproximationBitPositions_or_PointTransform = input.ReadByte();
+            scanHeader.Ss_StartOfSpectral_or_PredictorSelection = dataReader.ReadByte();
+            scanHeader.Se_EndOfSpectralSelection = dataReader.ReadByte();
+            scanHeader.Ah_Al_SuccessiveApproximationBitPositions_or_PointTransform = dataReader.ReadByte();
 
             return scanHeader;
         }

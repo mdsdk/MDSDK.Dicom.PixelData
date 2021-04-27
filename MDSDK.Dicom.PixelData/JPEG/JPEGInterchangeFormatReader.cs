@@ -8,7 +8,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
 {
     internal class JPEGInterchangeFormatReader
     {
-        private readonly BinaryStreamReader _input;
+        private readonly BinaryDataReader _dataReader;
 
         private readonly ushort _startOfFrameMarker;
 
@@ -18,9 +18,9 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
         private readonly HuffmanTable[] _huffmanTables = new HuffmanTable[4];
 
-        public JPEGInterchangeFormatReader(BinaryStreamReader input)
+        public JPEGInterchangeFormatReader(BufferedStreamReader input)
         {
-            _input = input;
+            _dataReader = new BinaryDataReader(input, ByteOrder.BigEndian);
 
             var marker = ReadMarker();
             if (marker != Marker.SOI)
@@ -41,7 +41,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
             _startOfFrameMarker = marker;
 
-            _frameHeader = FrameHeader.ReadFrom(_input);
+            _frameHeader = FrameHeader.ReadFrom(_dataReader);
 
             do
             {
@@ -54,7 +54,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
                 throw new IOException($"Expected SOS marker but got {marker:X4}");
             }
 
-            _scanHeader = ScanHeader.ReadFrom(_input);
+            _scanHeader = ScanHeader.ReadFrom(_dataReader);
         }
 
         public CodingType CodingType
@@ -99,7 +99,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
         private ushort ReadMarker()
         {
-            var b = _input.ReadByte();
+            var b = _dataReader.ReadByte();
 
             if (b != 0xFF)
             {
@@ -108,7 +108,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
             do
             {
-                b = _input.ReadByte();
+                b = _dataReader.ReadByte();
             }
             while (b == 0xFF);
 
@@ -117,7 +117,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
         private void ProcessDefineHuffmanTableSegment(ushort marker)
         {
-            var huffmanTableDefinitions = HuffmanTableDefinition.ReadArrayFrom(_input);
+            var huffmanTableDefinitions = HuffmanTableDefinition.ReadArrayFrom(_dataReader);
             foreach (var huffmanTableDefinition in huffmanTableDefinitions)
             {
                 if (huffmanTableDefinition == null)
@@ -136,8 +136,8 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
         private void SkipIgnorableMiscellanenousMarkerSegment()
         {
-            var length = _input.Read<ushort>();
-            _input.SkipBytes(length - 2); // length includes the two bytes of the length field itself
+            var length = _dataReader.Read<ushort>();
+            _dataReader.Input.SkipBytes(length - 2); // length includes the two bytes of the length field itself
         }
 
         private bool IfIsMiscellanenousMarkerSegmentThenProcessIt(ushort marker)
@@ -249,7 +249,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
             var huffmanTable = GetHuffmanTable(0);
 
-            var bitStreamReader = new BitReader(_input);
+            var bitStreamReader = new BitReader(_dataReader.Input);
 
             for (var row = 0; row < rows; row++)
             {
@@ -294,7 +294,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
             var huffmanTable1 = GetHuffmanTable(1);
             var huffmanTable2 = GetHuffmanTable(2);
 
-            var bitStreamReader = new BitReader(_input);
+            var bitStreamReader = new BitReader(_dataReader.Input);
 
             for (var row = 0; row < rows; row++)
             {

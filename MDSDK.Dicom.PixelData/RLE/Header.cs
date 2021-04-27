@@ -11,11 +11,13 @@ namespace MDSDK.Dicom.PixelData.RLE
 
         public uint[] SegmentOffsets { get; set; } = new uint[15];
 
-        public static Header ReadFrom(BinaryStreamReader input)
+        public static Header ReadFrom(BufferedStreamReader input)
         {
+            var dataReader = new BinaryDataReader(input, ByteOrder.LittleEndian);
+
             var header = new Header
             {
-                NumberOfSegments = input.Read<uint>()
+                NumberOfSegments = dataReader.Read<uint>()
             };
 
             if (header.NumberOfSegments > 15)
@@ -25,10 +27,10 @@ namespace MDSDK.Dicom.PixelData.RLE
 
             for (var i = 0; i < header.NumberOfSegments; i++)
             {
-                header.SegmentOffsets[i] = input.Read<uint>();
+                header.SegmentOffsets[i] = dataReader.Read<uint>();
             }
 
-            input.SkipBytes(4 * (15 - header.NumberOfSegments));
+            dataReader.Input.SkipBytes(4 * (15 - header.NumberOfSegments));
 
             return header;
         }

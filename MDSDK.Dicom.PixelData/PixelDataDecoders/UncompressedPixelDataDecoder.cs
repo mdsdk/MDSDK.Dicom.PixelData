@@ -15,7 +15,7 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
         public override long[] GetPixelDataFramePositions(DicomStreamReader dicomStreamReader, DicomImagePixelDescription desc,
             int numberOfFrames)
         {
-            if (!dicomStreamReader.SkipToPixelData(out uint valueLength))
+            if (!dicomStreamReader.TrySkipToPixelData(out uint valueLength))
             {
                 throw new Exception($"Missing PixelData");
             }
@@ -44,13 +44,6 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
 
         public override void DecodePixelDataFrame(DicomStreamReader dicomStreamReader, DicomImagePixelDescription desc, Memory<byte> outputBuffer)
         {
-            var input = dicomStreamReader.Input;
-
-            if (input.ByteOrder != ByteOrder.LittleEndian)
-            {
-                throw NotSupported(nameof(input.ByteOrder), input.ByteOrder);
-            }
-            
             var frameSize = desc.GetFrameSizeInBytes();
             if (outputBuffer.Length < frameSize)
             {
@@ -59,7 +52,7 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
 
             if (BinaryIOUtils.NativeByteOrder == ByteOrder.LittleEndian)
             {
-                input.ReadAll(outputBuffer.Span[0..frameSize]);
+                dicomStreamReader.Input.ReadAll(outputBuffer.Span[0..frameSize]);
             }
             else
             {

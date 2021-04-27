@@ -13,7 +13,7 @@ namespace MDSDK.Dicom.PixelData.JPEG
 
         public byte[] V_ValueAssociatedWithEachHuffmanCode { get; set; }
 
-        private static HuffmanTableDefinition ReadFrom(BinaryStreamReader input, ref int remainingLength)
+        private static HuffmanTableDefinition ReadFrom(BufferedStreamReader input, ref int remainingLength)
         {
             var huffmanTableDefinition = new HuffmanTableDefinition
             {
@@ -29,16 +29,16 @@ namespace MDSDK.Dicom.PixelData.JPEG
             return huffmanTableDefinition;
         }
 
-        public static HuffmanTableDefinition[] ReadArrayFrom(BinaryStreamReader input)
+        public static HuffmanTableDefinition[] ReadArrayFrom(BinaryDataReader dataReader)
         {
-            var Lh_HuffmanTableDefinitionLength = input.Read<ushort>();
+            var Lh_HuffmanTableDefinitionLength = dataReader.Read<ushort>();
 
             var remainingLength = Lh_HuffmanTableDefinitionLength - 2;
 
             var huffmanTableDefinitions = new HuffmanTableDefinition[4];
             for (var i = 0; (i < huffmanTableDefinitions.Length) && (remainingLength > 0); i++)
             {
-                huffmanTableDefinitions[i] = HuffmanTableDefinition.ReadFrom(input, ref remainingLength);
+                huffmanTableDefinitions[i] = HuffmanTableDefinition.ReadFrom(dataReader.Input, ref remainingLength);
             }
             return huffmanTableDefinitions;
         }

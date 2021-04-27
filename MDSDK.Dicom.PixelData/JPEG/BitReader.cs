@@ -8,13 +8,13 @@ namespace MDSDK.Dicom.PixelData.JPEG
 {
     class BitReader
     {
-        private readonly BinaryStreamReader _input;
+        private readonly BufferedStreamReader _input;
 
         private byte _bits;
 
         private int _bitCount;
 
-        internal BitReader(BinaryStreamReader input)
+        internal BitReader(BufferedStreamReader input)
         {
             _input = input;
         }

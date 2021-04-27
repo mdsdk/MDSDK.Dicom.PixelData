@@ -11,7 +11,7 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
     {
         public static RunLengthPixelDataDecoder Instance { get; } = new RunLengthPixelDataDecoder();
 
-        private int[] TryDecodeImage(BinaryStreamReader input, DicomImagePixelDescription desc, out string whyNot)
+        private int[] TryDecodeImage(BufferedStreamReader input, DicomImagePixelDescription desc, out string whyNot)
         {
             if ((desc.BitsAllocated % 8) != 0)
             {
@@ -87,7 +87,7 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
             return image;
         }
 
-        protected override void DecodePixelDataFrame(BinaryStreamReader input, DicomImagePixelDescription desc, Memory<byte> output)
+        protected override void DecodePixelDataFrame(BufferedStreamReader input, DicomImagePixelDescription desc, Memory<byte> output)
         {
             var image = TryDecodeImage(input, desc, out string whyNot);
             if (image == null)
