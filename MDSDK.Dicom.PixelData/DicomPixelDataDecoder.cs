@@ -17,12 +17,12 @@ namespace MDSDK.Dicom.PixelData
 
         private static readonly Dictionary<DicomUID, DicomPixelDataDecoder> TransferSyntaxPixelDataDecoders = new()
         {
-            { DicomUID.ImplicitVRLittleEndian, UncompressedPixelDataDecoder.Instance },
-            { DicomUID.ExplicitVRLittleEndian, UncompressedPixelDataDecoder.Instance },
-            { DicomUID.JPEGLossless_NonHierarchical_FirstOrderPrediction_Process14_SelectionValue1, JPEGLosslessNonDifferentialHuffman1PixelDataDecoder.Instance },
-            { DicomUID.JPEG2000ImageCompression, JPEG2000PixelDataDecoder.Instance },
-            { DicomUID.JPEG2000ImageCompression_LosslessOnly, JPEG2000PixelDataDecoder.Instance },
-            { DicomUID.RLELossless, RunLengthPixelDataDecoder.Instance },
+            { DicomUID.TransferSyntax.ImplicitVRLittleEndian, UncompressedPixelDataDecoder.Instance },
+            { DicomUID.TransferSyntax.ExplicitVRLittleEndian, UncompressedPixelDataDecoder.Instance },
+            { DicomUID.TransferSyntax.JPEGLossless, JPEGLosslessNonDifferentialHuffman1PixelDataDecoder.Instance },
+            { DicomUID.TransferSyntax.JPEG2000, JPEG2000PixelDataDecoder.Instance },
+            { DicomUID.TransferSyntax.JPEG2000Lossless, JPEG2000PixelDataDecoder.Instance },
+            { DicomUID.TransferSyntax.RLELossless, RunLengthPixelDataDecoder.Instance },
         };
 
         public static bool TryGet(DicomUID transferSyntaxUID, out DicomPixelDataDecoder pixelDataDecoder)
