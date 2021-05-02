@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MDSDK.Dicom.PixelData</name>
+    </assembly>
+    <members>
+        <member name="T:MDSDK.Dicom.PixelData.DicomImagePixelDescription">
+            <summary>DICOM attributes as defined by the DICOM Image Pixel Description macro</summary>
+        </member>
+        <member name="M:MDSDK.Dicom.PixelData.DicomImagePixelDescription.GetFrameSizeInBytes">
+            <summary>Returns the size in bytes of a single image frame</summary>
+        </member>
+        <member name="T:MDSDK.Dicom.PixelData.DicomPhotometricInterpretation">
+            <summary>Defined values for the DICOM Photometric Interpretation attribute</summary>
+        </member>
+        <member name="M:MDSDK.Dicom.PixelData.DicomPhotometricInterpretation.IsMonochrome(System.String)">
+            <summary>Returns whether the given Photometric Interpretation string is MONOCHROME1 or MONOCHROME2</summary>
+        </member>
+        <member name="T:MDSDK.Dicom.PixelData.DicomPixelDataDecoder">
+            <summary>Base class for DICOM pixel data decoders</summary>
+        </member>
+        <member name="M:MDSDK.Dicom.PixelData.DicomPixelDataDecoder.GetPixelDataFramePositions(MDSDK.Dicom.Serialization.DicomStreamReader,MDSDK.Dicom.PixelData.DicomImagePixelDescription,System.Int32)">
+            <summary>Returns the positions of the individual pixel data frames in the DICOM input stream</summary>
+        </member>
+        <member name="M:MDSDK.Dicom.PixelData.DicomPixelDataDecoder.DecodePixelDataFrame(MDSDK.Dicom.Serialization.DicomStreamReader,MDSDK.Dicom.PixelData.DicomImagePixelDescription,System.Memory{System.Byte})">
+            <summary>Decodes the pixel data frame that starts at the current position of the DICOM input stream</summary>
+        </member>
+        <member name="M:MDSDK.Dicom.PixelData.DicomPixelDataDecoder.TryGet(MDSDK.Dicom.Serialization.DicomUID,MDSDK.Dicom.PixelData.DicomPixelDataDecoder@)">
+            <summary>Tries to return a pixel data decoder for the given tranfer syntax</summary>
+        </member>
+        <member name="T:MDSDK.Dicom.PixelData.DicomPixelRepresentation">
+            <summary>Defined values for the DICOM Pixel Representation attribute</summary>
+        </member>
+        <member name="T:MDSDK.Dicom.PixelData.DicomPlanarConfiguration">
+            <summary>Defined values for the DICOM Planar Configuration attribute</summary>
+        </member>
+        <member name="T:MDSDK.Dicom.PixelData.DicomVOILUTFunction">
+            <summary>Defined values for the DICOM VOI LUT Function attribute</summary>
+        </member>
+    </members>
+</doc>

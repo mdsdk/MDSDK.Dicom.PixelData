@@ -4,6 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\GitHub\mdsdk\MDSDK.Dicom.PixelData\MDSDK.Dicom.PixelData\MDSDK.Dicom.PixelData.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\MDSDK.BinaryIO\MDSDK.BinaryIO\MDSDK.BinaryIO.csproj" />
     <ProjectReference Include="..\..\MDSDK.Dicom.Serialization\MDSDK.Dicom.Serialization\MDSDK.Dicom.Serialization.csproj" />
