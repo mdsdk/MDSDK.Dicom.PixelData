@@ -26,7 +26,7 @@
             <summary>Decodes the pixel data frame that starts at the current position of the DICOM input stream</summary>
         </member>
         <member name="M:MDSDK.Dicom.PixelData.DicomPixelDataDecoder.TryGet(MDSDK.Dicom.Serialization.DicomUID,MDSDK.Dicom.PixelData.DicomPixelDataDecoder@)">
-            <summary>Tries to return a pixel data decoder for the given tranfer syntax</summary>
+            <summary>Tries to return a pixel data decoder for the given transfer syntax</summary>
         </member>
         <member name="T:MDSDK.Dicom.PixelData.DicomPixelRepresentation">
             <summary>Defined values for the DICOM Pixel Representation attribute</summary>
