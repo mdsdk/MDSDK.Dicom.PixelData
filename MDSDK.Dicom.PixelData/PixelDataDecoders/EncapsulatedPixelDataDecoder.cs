@@ -14,7 +14,7 @@ namespace MDSDK.Dicom.PixelData.PixelDataDecoders
             int numberOfFrames)
         {
             var framePositions = new long[numberOfFrames];
-            dicomStreamReader.ReadEncapsulatedPixelDataFramePositions(framePositions);
+            dicomStreamReader.GetEncapsulatedPixelDataFramePositions(framePositions);
             return framePositions;
         }
 
